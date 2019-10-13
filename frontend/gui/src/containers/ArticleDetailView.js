@@ -18,8 +18,8 @@ class ArticleDetailView extends Component {
 
     render() {
         return (
-            <Card title={this.state.article.title}>
-                <p>{this.state.article.content}</p>
+            <Card title={this.state.articles.title}>
+                <p>{this.state.articles.content}</p>
             </Card>
         );
     }
