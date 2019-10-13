@@ -24,7 +24,6 @@ class ArticleListView extends Component {
         // when component is rendered, get data and update state
         axios.get("http://127.0.0.1:8000/api/").then(res => {
             this.setState({ articles: res.data });
-            console.log(res.data);
         });
     }
 
