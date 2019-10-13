@@ -7,6 +7,7 @@ class ArticleDetailView extends Component {
     };
 
     componentDidMount() {
+        // this is the router path
         const articleID = this.props.match.params.articleID;
         // when component is rendered, get data and update state
         // get article from database
