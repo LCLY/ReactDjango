@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Articles from "../components/Articles";
-
+import FormLayout from "../components/FormLayout";
 class ArticleListView extends Component {
     state = {
         articles: [],
@@ -15,7 +15,18 @@ class ArticleListView extends Component {
     }
 
     render() {
-        return <Articles data={this.state.articles} />;
+        return (
+            <div>
+                <Articles data={this.state.articles} />
+                <br />
+                <h2>Create an article</h2>
+                <FormLayout
+                    requestType="post"
+                    articleID={null}
+                    btnText="Create"
+                />
+            </div>
+        );
     }
 }
 
