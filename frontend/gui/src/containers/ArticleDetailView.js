@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Card } from "antd";
+import { Card, Button } from "antd";
+import FormLayout from "../components/FormLayout";
 class ArticleDetailView extends Component {
     state = {
         articles: {},
@@ -11,16 +12,45 @@ class ArticleDetailView extends Component {
         const articleID = this.props.match.params.articleID;
         // when component is rendered, get data and update state
         // get article from database
-        axios.get(`http://127.0.0.1:8000/api/${articleID}`).then(res => {
-            this.setState({ articles: res.data });
-        });
+        var config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+        };
+
+        axios
+            .get(`http://127.0.0.1:8000/api/${articleID}`, config)
+            .then(res => {
+                this.setState({ articles: res.data });
+            })
+            .catch(error => console.log(error));
     }
+
+    handleDelete = e => {
+        const articleID = this.props.match.params.articleID;
+        axios.delete(`http://127.0.0.1:8000/api/${articleID}`);
+        this.props.history.push("/"); //redirect us back to root
+        this.forceUpdate(); //brute force way to force the page refresh
+    };
 
     render() {
         return (
-            <Card title={this.state.articles.title}>
-                <p>{this.state.articles.content}</p>
-            </Card>
+            <div>
+                <Card title={this.state.articles.title}>
+                    <p>{this.state.articles.content}</p>
+                </Card>
+                <FormLayout
+                    requestType="put"
+                    articleID={this.props.match.params.articleID}
+                    btnText="Update"
+                />
+                <form onSubmit={this.handleDelete}>
+                    <Button htmlType="submit" type="danger">
+                        Delete
+                    </Button>
+                </form>
+            </div>
         );
     }
 }
