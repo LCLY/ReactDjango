@@ -91,3 +91,28 @@ export const authSignup = (username, email, password1, password2) => {
             });
     };
 };
+
+export const authCheckState = () => {
+    return dispatch => {
+        const token = localStorage.getItem("token");
+        if (token === undefined) {
+            dispatch(logout());
+        } else {
+            const expirationDate = new Date(
+                localStorage.getItem("expirationDate"),
+            );
+            // if its old, logout
+            if (expirationDate <= new Date()) {
+                dispatch(logout());
+            } else {
+                dispatch(authSuccess(token));
+                dispatch(
+                    checkAuthTimeout(
+                        (expirationDate.getTime() - new Date().getTime()) /
+                            1000,
+                    ),
+                );
+            }
+        }
+    };
+};
