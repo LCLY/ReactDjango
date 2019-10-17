@@ -1,32 +1,24 @@
 import React from "react";
-import {
-    Form,
-    Input,
-    Tooltip,
-    Icon,
-    Cascader,
-    Select,
-    Row,
-    Col,
-    Checkbox,
-    Button,
-    AutoComplete,
-} from "antd";
-
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
-
+import { Button, Form, Input, Icon } from "antd";
+import * as actions from "../store/actions/auth";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 class RegistrationForm extends React.Component {
     state = {
         confirmDirty: false,
-        autoCompleteResult: [],
     };
 
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log("Received values of form: ", values);
+                this.props.onAuth(
+                    values.username,
+                    values.email,
+                    values.password,
+                    values.confirm,
+                );
+                this.props.history.push("/");
             }
         });
     };
@@ -99,7 +91,7 @@ class RegistrationForm extends React.Component {
                                     style={{ color: "rgba(0,0,0,.25)" }}
                                 />
                             }
-                            placeholder="Username"
+                            placeholder="Email"
                         />,
                     )}
                 </Form.Item>
@@ -128,6 +120,7 @@ class RegistrationForm extends React.Component {
                         />,
                     )}
                 </Form.Item>
+
                 <Form.Item>
                     {getFieldDecorator("confirm", {
                         rules: [
@@ -149,9 +142,22 @@ class RegistrationForm extends React.Component {
                                 />
                             }
                             type="password"
-                            placeholder="Password"
+                            placeholder="Confirm password"
                         />,
                     )}
+                </Form.Item>
+                <Form.Item>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        style={{ marginRight: "10px" }}
+                    >
+                        Sign up
+                    </Button>
+                    Or
+                    <NavLink style={{ marginRight: "10px" }} to="/login/">
+                        &nbsp;&nbsp;Login
+                    </NavLink>
                 </Form.Item>
             </Form>
         );
@@ -162,4 +168,20 @@ const WrappedRegistrationForm = Form.create({ name: "register" })(
     RegistrationForm,
 );
 
-export default WrappedRegistrationForm;
+const mapStateToProps = state => {
+    return {
+        loading: state.loading,
+        error: state.error,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (username, email, password1, password2) =>
+            dispatch(actions.authSignup(username, email, password1, password2)),
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(WrappedRegistrationForm);

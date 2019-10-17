@@ -17,7 +17,7 @@ const BaseRouter = () => {
                 component={ArticleDetailView}
             />
             <Route exact path="/login/" component={Login} />
-            <Route exact path="/signup/" component={signup} />
+            <Route exact path="/signup/" component={Signup} />
         </div>
     );
 };
