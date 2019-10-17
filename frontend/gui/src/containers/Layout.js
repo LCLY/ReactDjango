@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 import { connect } from "react-redux";
 const { Header, Content, Footer } = Layout;
@@ -63,7 +63,10 @@ const mapDispatchToProps = dispatch => {
         logout: () => dispatch(actions.logout()),
     };
 };
-export default connect(
-    null,
-    mapDispatchToProps,
-)(CustomLayout);
+// withRouter is to fix some issue with the Link to=""
+export default withRouter(
+    connect(
+        null,
+        mapDispatchToProps,
+    )(CustomLayout),
+);
