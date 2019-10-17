@@ -10,10 +10,10 @@ class Login extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.onAuth(values.username, values.password);
+                // redirect after logging in
+                this.props.history.push("/");
             }
         });
-        // redirect after logging in
-        this.props.history.push("/");
     };
 
     render() {
