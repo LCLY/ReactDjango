@@ -102,7 +102,7 @@ class RegistrationForm extends React.Component {
                                 <Input
                                     prefix={
                                         <Icon
-                                            type="email"
+                                            type="mail"
                                             style={{ color: "rgba(0,0,0,.25)" }}
                                         />
                                     }
