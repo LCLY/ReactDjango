@@ -22,7 +22,7 @@ class CustomLayout extends React.Component {
                             </Menu.Item>
                         ) : (
                             <Menu.Item key="2">
-                                <Link to="/">Login</Link>
+                                <Link to="/Login">Login</Link>
                             </Menu.Item>
                         )}
                         <Menu.Item key="1">

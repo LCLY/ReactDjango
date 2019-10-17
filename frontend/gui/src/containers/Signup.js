@@ -18,7 +18,12 @@ class RegistrationForm extends React.Component {
                     values.password,
                     values.confirm,
                 );
-                this.props.history.push("/");
+                if (localStorage.getItem("token") !== null) {
+                    console.log(
+                        "Sign up successfully, token has been generated",
+                    );
+                    this.props.history.push("/");
+                }
             }
         });
     };
