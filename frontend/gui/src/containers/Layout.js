@@ -25,9 +25,13 @@ class CustomLayout extends React.Component {
                                 <Link to="/Login">Login</Link>
                             </Menu.Item>
                         )}
-                        <Menu.Item key="1">
-                            <Link to="/">Posts</Link>
-                        </Menu.Item>
+                        {this.props.isAuthenticated ? (
+                            <Menu.Item key="1">
+                                <Link to="/">Posts</Link>
+                            </Menu.Item>
+                        ) : (
+                            ""
+                        )}
                     </Menu>
                 </Header>
                 <Content style={{ padding: "0 50px" }}>
