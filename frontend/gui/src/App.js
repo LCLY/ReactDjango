@@ -15,7 +15,7 @@ class App extends Component {
         return (
             <div>
                 <Router>
-                    {/* this will pass the isAutenticated to customlayout and dont have to setup redux in that component */}
+                    {/* this will pass the isAuthenticated to customlayout and dont have to setup redux in that component */}
                     <CustomLayout {...this.props}>
                         <BaseRouter />
                     </CustomLayout>
@@ -27,7 +27,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        // if token null isAuthenticated is false
+        // if token is null isAuthenticated will be false
         isAuthenticated: state.token !== null,
     };
 };
