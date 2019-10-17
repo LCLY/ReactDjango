@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "D:\\Projects\\ReactDjango\\backend\\python_env\\env1\\Scripts\\python",
+    "team.showWelcomeMessage": false,
+    "editor.formatOnSave": true,
+    "python.linting.pep8Enabled": true,
+    "python.linting.pylintPath": "D:\\Projects\\ReactDjango\\backend\\python_env\\env1\\Scripts\\pylint",
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+    "python.linting.pylintEnabled": true,
+    "python.linting.pep8Args": ["--ignore=E501"],
+    "python.venvPath": "${workspaceFolder}/backend/env/bin/python3"
+}
