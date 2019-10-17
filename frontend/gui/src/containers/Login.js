@@ -13,7 +13,7 @@ class NormalLoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.onAuth(values.userName, values.password);
-                if (localStorage.getItem("token") !== null) {
+                if (this.props.token === null) {
                     console.log("Token has been generated");
                     this.props.history.push("/");
                 }
@@ -105,6 +105,7 @@ const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 const mapStateToProps = state => {
     return {
+        token: state.token,
         loading: state.loading,
         error: state.error,
     };
@@ -112,8 +113,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username, password) =>
-            dispatch(actions.authLogin(username, password)),
+        onAuth: (username, password) => {
+            dispatch(actions.authLogin(username, password));
+        },
     };
 };
 
