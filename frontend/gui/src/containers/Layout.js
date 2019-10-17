@@ -18,11 +18,11 @@ class CustomLayout extends React.Component {
                     >
                         {this.props.isAuthenticated ? (
                             <Menu.Item key="2" onClick={this.props.logout}>
-                                <Link>Logout</Link>
+                                <Link to="/login">Logout</Link>
                             </Menu.Item>
                         ) : (
                             <Menu.Item key="2">
-                                <Link to="/login">Login</Link>
+                                <Link to="/">Login</Link>
                             </Menu.Item>
                         )}
                         <Menu.Item key="1">
