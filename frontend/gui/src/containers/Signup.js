@@ -20,12 +20,6 @@ class RegistrationForm extends React.Component {
                     values.password,
                     values.confirm,
                 );
-                if (localStorage.getItem("token") !== null) {
-                    console.log(
-                        "Sign up successfully, token has been generated",
-                    );
-                    this.props.history.push("/");
-                }
             }
         });
     };
@@ -57,6 +51,11 @@ class RegistrationForm extends React.Component {
         let errorMessage = null;
         if (this.props.error) {
             errorMessage = <p>{this.props.error.message}</p>;
+        }
+
+        if (localStorage.getItem("token") !== null) {
+            console.log("Sign up successfully, token has been generated");
+            this.props.history.push("/");
         }
         return (
             <div>
@@ -103,7 +102,7 @@ class RegistrationForm extends React.Component {
                                 <Input
                                     prefix={
                                         <Icon
-                                            type="mail"
+                                            type="email"
                                             style={{ color: "rgba(0,0,0,.25)" }}
                                         />
                                     }

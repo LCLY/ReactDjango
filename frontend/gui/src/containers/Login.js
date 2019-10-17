@@ -13,15 +13,16 @@ class NormalLoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.onAuth(values.userName, values.password);
-                if (this.props.token === null) {
-                    console.log("Token has been generated");
-                    this.props.history.push("/");
-                }
             }
         });
     };
 
     render() {
+        if (this.props.token !== null) {
+            console.log("Token has been generated");
+            this.props.history.push("/");
+        }
+
         let errorMessage = null;
         if (this.props.error) {
             errorMessage = <p>{this.props.error.message}</p>;
